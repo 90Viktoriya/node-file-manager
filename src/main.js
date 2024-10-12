@@ -4,22 +4,32 @@ import { stdin, stdout } from 'node:process';
 import { homedir, EOL, hostname } from 'node:os';
 import { fork } from 'node:child_process';
 import { join, dirname } from 'node:path';
+import { cd } from './navigation/cd.js';
 
 let currentDir = homedir();
 const __dirname = import.meta.dirname;
 const rl = readline.createInterface({ input: stdin, output: stdout });
-rl.setPrompt(`You are currently in ${currentDir}${EOL}>`);
+function changePrompt(rl, currentDir) {
+  rl.setPrompt(`You are currently in ${currentDir}${EOL}>`);
+}
+changePrompt(rl, currentDir);
 rl.prompt();
 rl.on("SIGINT", function () {
   process.emit("SIGINT");
 });
-rl.on("line", (input) => {
+rl.on("line", async (input) => {
   let child;
   let error = true;
   if (input.match('^up$')) {
     error = false;
     currentDir = dirname(currentDir);
-    rl.setPrompt(`You are currently in ${currentDir}${EOL}>`);
+    changePrompt(rl, currentDir);
+  }
+  if (input.startsWith('cd ')) {
+    error = false;
+    const result = await cd([currentDir, input]);
+    currentDir = result;
+    changePrompt(rl, currentDir);
   }
   if (input.startsWith('os ')) {
     const filename = join(__dirname, "os.js");
