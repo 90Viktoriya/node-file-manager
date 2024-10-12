@@ -20,6 +20,6 @@ const result = await Promise.all(results);
 
 console.table([...directories.sort().map((item) => ({Name: item, Type: 'directory'})), ...files.map((item) => ({Name: item, Type: 'file'}))]);
 } catch (error) {
-  console.error(`Operation failed: ${error.message}`)
+  console.error("\x1b[31mOperation failed:\x1b[0m", error.message)
 }
 

@@ -7,10 +7,10 @@ const fileManager = () => {
   const filename = join(__dirname, "main.js");
   const userNameArg = argv.filter((value,) => value.match('^(--username)'))[0] || '';
   const userName = userNameArg.slice(userNameArg.indexOf('=') + 1);
-  console.log(`Welcome to the File Manager, ${userName}!`);
+  console.log(`\x1b[32mWelcome to the File Manager, \x1b[33m${userName}\x1b[32m!\x1b[0m`);
   const child = fork(filename);
   child.on('close', () => {
-    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+    console.log(`\x1b[32mThank you for using File Manager, \x1b[33m${userName}\x1b[32m, goodbye!\x1b[0m`);
   });
 }
 

@@ -13,7 +13,7 @@ const calcHash = new Transform({
   transform(chunk, _, callback) {
     const hash = createHash('sha256');
     hash.update(chunk);
-    callback(null, `${hash.digest('hex')}${EOL}`);
+    callback(null, `\x1b[33m${hash.digest('hex')}\x1b[0m${EOL}`);
   },
 });
 
@@ -22,8 +22,8 @@ const calculateHash = async () => {
   try {
     const input = createReadStream(filename);
     await stream.pipeline(input, calcHash, stdout)
-  } catch {
-    console.error('Operation failed');
+  } catch (error) {
+    console.log("\x1b[31mOperation failed:\x1b[0m", error.message);
     process.exit();
   }
 };

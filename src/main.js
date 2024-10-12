@@ -10,7 +10,7 @@ let currentDir = homedir();
 const __dirname = import.meta.dirname;
 const rl = readline.createInterface({ input: stdin, output: stdout });
 function changePrompt(rl, currentDir) {
-  rl.setPrompt(`You are currently in ${currentDir}${EOL}>`);
+  rl.setPrompt(`\x1b[32mYou are currently in \x1b[33m${currentDir}${EOL}\x1b[35m>\x1b[0m`);
 }
 changePrompt(rl, currentDir);
 rl.prompt();
@@ -62,7 +62,7 @@ rl.on("line", async (input) => {
       process.exit();
     } else {
       if (error) {
-        console.error('Invalid input');
+        console.log("\x1b[31mInvalid input:\x1b[0m");
        }
       rl.prompt();
     }
