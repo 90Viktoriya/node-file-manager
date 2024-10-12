@@ -31,6 +31,10 @@ rl.on("line", async (input) => {
     currentDir = result;
     changePrompt(rl, currentDir);
   }
+  if (input.match('^ls$')) {
+    const filename = join(__dirname, "navigation", "list.js");
+    child = fork(filename, [currentDir]);
+  }
   if (input.startsWith('os ')) {
     const filename = join(__dirname, "os.js");
     child = fork(filename, input.split(' '));
