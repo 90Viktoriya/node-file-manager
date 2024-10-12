@@ -6,8 +6,8 @@ const cd = async (args) => {
   try {
     await access(path, constants.R_OK);
     return path;
-  } catch {
-    console.error('Operation failed');
+  } catch (error) {
+    console.error("\x1b[31mOperation failed:\x1b[0m", error.message);
     return args[0];
   } 
 }

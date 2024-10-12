@@ -35,6 +35,30 @@ rl.on("line", async (input) => {
     const filename = join(__dirname, "navigation", "list.js");
     child = fork(filename, [currentDir]);
   }
+  if (input.startsWith('cat ')) {
+    const filename = join(__dirname, "fileOperation", "cat.js");
+    child = fork(filename, [currentDir, input]);
+  }
+  if (input.startsWith('add ')) {
+    const filename = join(__dirname, "fileOperation", "add.js");
+    child = fork(filename, [currentDir, input]);
+  }
+  if (input.startsWith('rn ')) {
+    const filename = join(__dirname, "fileOperation", "rn.js");
+    child = fork(filename, [currentDir, input]);
+  }
+  if (input.startsWith('cp ')) {
+    const filename = join(__dirname, "fileOperation", "cp.js");
+    child = fork(filename, [currentDir, input]);
+  }
+  if (input.startsWith('mv ')) {
+    const filename = join(__dirname, "fileOperation", "mv.js");
+    child = fork(filename, [currentDir, input]);
+  }
+  if (input.startsWith('rm ')) {
+    const filename = join(__dirname, "fileOperation", "rm.js");
+    child = fork(filename, [currentDir, input]);
+  }
   if (input.startsWith('os ')) {
     const filename = join(__dirname, "os.js");
     child = fork(filename, input.split(' '));
