@@ -18,7 +18,7 @@ try {
 });
 const result = await Promise.all(results);
 
-console.table([...directories.sort().map((item) => [item, 'directory']), ...files.map((item) => [item, 'file'])]);
+console.table([...directories.sort().map((item) => ({Name: item, Type: 'directory'})), ...files.map((item) => ({Name: item, Type: 'file'}))]);
 } catch (error) {
   console.error(`Operation failed: ${error.message}`)
 }
