@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 import { getPath } from '../utils/getPath.js';
 import { FILE_DELETED, OPERATION_FAILED } from '../utils/constants.js';
 

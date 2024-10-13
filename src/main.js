@@ -50,11 +50,11 @@ rl.on("line", async (input) => {
   }
   if (input.startsWith('cp ')) {
     const filename = join(__dirname, "fileOperation", "cp.js");
-    child = fork(filename, [currentDir, input]);
+    child = fork(filename, [currentDir, input, false]);
   }
   if (input.startsWith('mv ')) {
-    const filename = join(__dirname, "fileOperation", "mv.js");
-    child = fork(filename, [currentDir, input]);
+    const filename = join(__dirname, "fileOperation", "cp.js");
+    child = fork(filename, [currentDir, input, true]);
   }
   if (input.startsWith('rm ')) {
     const filename = join(__dirname, "fileOperation", "rm.js");
@@ -69,10 +69,12 @@ rl.on("line", async (input) => {
     child = fork(filename, [currentDir, input]);
   }
   if (input.startsWith('compress')) {
-    console.log('Compress');
+    const filename = join(__dirname, "Brotli", "compress.js");
+    child = fork(filename, [currentDir, input]);
   }
   if (input.startsWith('decompress')) {
-    console.log('Decompress');
+    const filename = join(__dirname, "Brotli", "decompress.js");
+    child = fork(filename, [currentDir, input]);
   }
   if (child) {
     error = false;

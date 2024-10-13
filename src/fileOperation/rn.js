@@ -1,5 +1,5 @@
-import fs from 'fs/promises';
-import { resolve, join, dirname, basename } from 'path';
+import fs from 'node:fs/promises';
+import { resolve, join, dirname, basename } from 'node:path';
 import { getArgs } from '../utils/getArgs.js';
 import { INVALID_INPUT, OPERATION_FAILED, INCORRECT_ARGS, INCORRECT_NAME, FILE_EXIST } from '../utils/constants.js';
 

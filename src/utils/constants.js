@@ -8,3 +8,7 @@ export const NOT_DIRECTORY = "It's not a directory";
 export const INCORRECT_ARGS = "Incorrect arguments";
 export const INCORRECT_NAME = "Incorrect new filename";
 export const FILE_EXIST = "Such file already exist";
+export const FILE_COPIED = "\x1b[35mFile was copied\x1b[0m";
+export const FILE_MOVED = "\x1b[35mFile was moved\x1b[0m";
+export const FILE_COMPRESSED = "\x1b[35mFile was compressed\x1b[0m";
+export const FILE_DECOMPRESSED = "\x1b[35mFile was decompressed\x1b[0m";
