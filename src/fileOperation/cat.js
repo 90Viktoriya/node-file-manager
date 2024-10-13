@@ -1,4 +1,6 @@
-import fs from 'fs/promises';
+import { createReadStream } from 'node:fs';
+import stream from 'node:stream/promises';
+import { stdout } from 'node:process';
 import { getPath } from '../utils/getPath.js';
 import { OPERATION_FAILED, FILE_CONTENT } from '../utils/constants.js';
 
@@ -7,9 +9,9 @@ const filename = getPath(args);
 
 const read = async () => {
   try {
-  const contents = await fs.readFile(filename, { encoding: 'utf8' });
+  const contents = createReadStream(filename);
   console.log(FILE_CONTENT);
-  console.log(`\x1b[33m${contents}\x1b[0m`);
+  await stream.pipeline(contents, stdout, { end: false });
   } catch (error) {
     console.error(OPERATION_FAILED, error.message);
   }

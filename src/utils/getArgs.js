@@ -4,15 +4,15 @@ const getArgs = (args, count) => {
   let argsString = args.slice(args.indexOf(' ')).trim();
   const result = [];
   let index = argsString.indexOf('"');
-  console.log(argsString);
-  console.log(index);
+  if (index === -1) {
+    return argsString.split(' ');
+  }
   while (index >= 0) {
     let arg = argsString.substring(0, argsString.indexOf('"')).trim();
     if (arg.trim()) {
       result.push(arg.trim());
     }
     const endIndex = argsString.indexOf('"', index + 2);
-    console.log(endIndex);
     if (endIndex >= 0) {
       arg = argsString.substring(index + 1, endIndex);
       if (arg.trim()) {
@@ -20,8 +20,6 @@ const getArgs = (args, count) => {
       } else return [];
       argsString = argsString.slice(endIndex + 1);
       index = argsString.indexOf('"');
-      console.log(argsString);
-      console.log(result);
     } else return [];
   }
   if (argsString.trim()) {
