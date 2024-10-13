@@ -1,5 +1,5 @@
 import { readdir, stat } from 'node:fs/promises';
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
 
 const srcDir = process.argv.slice(2)[0];
 const directories = [];

@@ -1,8 +1,16 @@
-import fs from 'fs/promises';
-import { getPath } from '../utils/getPath.js';
+import fs from 'node:fs/promises';
+import { basename, join } from 'node:path';
 
 const args = process.argv.slice(2);
-const filename = getPath(args);
+
+const filenameArg = args[1].slice(args[1].indexOf(' ')).trim();
+let filename = '';
+if (basename(filenameArg) === filenameArg) {
+  filename = join(args[0],filenameArg);
+} else {
+  console.error("\x1b[31mInvalid input:\x1b[0m", "I can create only in current working directory");
+  process.exit();
+}
 
 const create = async () => {
   try {
