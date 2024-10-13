@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import { getPath } from '../utils/getPath.js';
+import { FILE_DELETED, OPERATION_FAILED } from '../utils/constants.js';
 
 const args = process.argv.slice(2);
 const filename = getPath(args);
@@ -7,9 +8,9 @@ const filename = getPath(args);
 const remove = async () => {
   try {
     await fs.rm(filename);
-    console.log("\x1b[35mFile was deleted\x1b[0m");
+    console.log(FILE_DELETED);
   } catch (error) {
-    console.error("\x1b[31mOperation failed:\x1b[0m", error.message);
+    console.error(OPERATION_FAILED, error.message);
   }
 };
 

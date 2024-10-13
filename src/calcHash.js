@@ -5,6 +5,7 @@ import stream from 'node:stream/promises';
 import { Transform } from 'node:stream';
 import { EOL } from 'node:os';
 import { getPath } from './utils/getPath.js';
+import { OPERATION_FAILED } from './utils/constants.js';
 
 const args = process.argv.slice(2);
 const filename = getPath(args);
@@ -23,7 +24,7 @@ const calculateHash = async () => {
     const input = createReadStream(filename);
     await stream.pipeline(input, calcHash, stdout)
   } catch (error) {
-    console.log("\x1b[31mOperation failed:\x1b[0m", error.message);
+    console.log(OPERATION_FAILED, error.message);
     process.exit();
   }
 };

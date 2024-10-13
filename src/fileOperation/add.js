@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { basename, join } from 'node:path';
+import { INVALID_INPUT, OPERATION_FAILED, FILE_CREATED, CREATION_FAILED } from '../utils/constants.js';
 
 const args = process.argv.slice(2);
 
@@ -8,16 +9,16 @@ let filename = '';
 if (basename(filenameArg) === filenameArg) {
   filename = join(args[0],filenameArg);
 } else {
-  console.error("\x1b[31mInvalid input:\x1b[0m", "I can create only in current working directory");
+  console.error(INVALID_INPUT, CREATION_FAILED);
   process.exit();
 }
 
 const create = async () => {
   try {
     await fs.appendFile(filename, '', { flag: 'ax+' });
-    console.log("\x1b[35mFile was created\x1b[0m");
+    console.log(FILE_CREATED);
   } catch (error) {
-    console.error("\x1b[31mOperation failed:\x1b[0m", error.message);
+    console.error(OPERATION_FAILED, error.message);
   }
 };
 

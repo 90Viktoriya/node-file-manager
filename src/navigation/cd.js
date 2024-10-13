@@ -1,5 +1,6 @@
 import { getPath } from '../utils/getPath.js';
 import { access, constants, stat } from 'node:fs/promises';
+import { OPERATION_FAILED, NOT_DIRECTORY } from '../utils/constants.js';
 
 const cd = async (args) => {
   const path = getPath(args);
@@ -9,10 +10,10 @@ const cd = async (args) => {
     if (result.isDirectory()) {
       return path;
     } else {
-      throw new Error("It's not a directory");
+      throw new Error(NOT_DIRECTORY);
     }  
   } catch (error) {
-    console.error("\x1b[31mOperation failed:\x1b[0m", error.message);
+    console.error(OPERATION_FAILED, error.message);
     return args[0];
   } 
 }

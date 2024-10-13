@@ -5,6 +5,7 @@ import { homedir, EOL, hostname } from 'node:os';
 import { fork } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { cd } from './navigation/cd.js';
+import { INVALID_INPUT } from './utils/constants.js';
 
 let currentDir = homedir();
 const __dirname = import.meta.dirname;
@@ -86,7 +87,7 @@ rl.on("line", async (input) => {
       process.exit();
     } else {
       if (error) {
-        console.log("\x1b[31mInvalid input:\x1b[0m");
+        console.log(INVALID_INPUT);
        }
       rl.prompt();
     }

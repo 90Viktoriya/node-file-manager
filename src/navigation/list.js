@@ -1,5 +1,6 @@
 import { readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import { OPERATION_FAILED } from '../utils/constants.js';
 
 const srcDir = process.argv.slice(2)[0];
 const directories = [];
@@ -20,6 +21,6 @@ const result = await Promise.all(results);
 
 console.table([...directories.sort().map((item) => ({Name: item, Type: 'directory'})), ...files.map((item) => ({Name: item, Type: 'file'}))]);
 } catch (error) {
-  console.error("\x1b[31mOperation failed:\x1b[0m", error.message)
+  console.error(OPERATION_FAILED, error.message)
 }
 
